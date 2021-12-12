@@ -1,7 +1,8 @@
 all: compile run
 
 compile:
-	gcc -o ./bin/main ./src/main.c
+	gcc -I ./include -c ./src/colors.c -o ./lib/colors.o 
+	gcc -I ./include -o ./bin/main ./src/main.c ./lib/colors.o
 
 run:
 	./bin/main
