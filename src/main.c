@@ -3,8 +3,11 @@
 #include <unistd.h>
 #include "colors.h"
 #include <stdlib.h>
+#include <sys/wait.h>
+
 
 char workingDir[80];
+int childPID[5];
 
 void cd(const char* path)
 {
@@ -21,8 +24,14 @@ void cd(const char* path)
     setenv("pwd", workingDir, 1);
 }
 
+void showpid(void)
+{
+    
+}
+
 int main()
 {
+    printf("%d", childPID[0]);
     char input[80];
     if(getcwd(workingDir, sizeof(workingDir)))
     {
@@ -50,6 +59,7 @@ int main()
         printf("You entered the command: %s\n", input);
         char* command = strtok(input, " ");
         char* token = strtok(NULL, " ");
+        
         if(!strcmp(command, "cd"))
         {
             if(!token)
@@ -62,6 +72,23 @@ int main()
             {
                 cd(token);
             }
+        }
+
+        pid_t pid = fork();
+        if(pid > 0)
+        {
+            wait(NULL);
+            //parent func
+        }
+        else if(pid == 0)
+        {
+            char* argv[] = {"pwd", NULL};
+            execvp(command, argv);
+            exit(0);
+        }
+        else 
+        {
+                // error
         }
         
     } while (strcmp(input, "exit"));
