@@ -13,7 +13,7 @@ int parse(char* input, char* command, char** args)
 	int res = i;
 	args[0] = temp;
 	
-	while(temp != NULL && res< 11)
+	while(temp != NULL && res< 10)
 	{
 		temp = strtok(NULL, " ");
 		args[res] = temp;
