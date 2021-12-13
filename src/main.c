@@ -4,7 +4,7 @@
 #include "colors.h"
 #include <stdlib.h>
 #include <sys/wait.h>
-
+#include "parser.h"
 
 char workingDir[80];
 int childPID[5];
@@ -57,6 +57,7 @@ int main()
         fgets(input, sizeof(input), stdin);
         input[strcspn(input, "\n")] = 0;
         printf("You entered the command: %s\n", input);
+        /*
         char* command = strtok(input, " ");
         char* token = strtok(NULL, " ");
         
@@ -73,7 +74,11 @@ int main()
                 cd(token);
             }
         }
-
+        */
+        char* argv[10];
+        char command[80];
+        int count = parse(input, command, argv);
+        //printf("Command = %s\nCount = %d\n", command, count);
         pid_t pid = fork();
         if(pid > 0)
         {
@@ -82,7 +87,7 @@ int main()
         }
         else if(pid == 0)
         {
-            char* argv[] = {"pwd", NULL};
+            //char* argv[] = {"pwd", NULL};
             execvp(command, argv);
             exit(0);
         }

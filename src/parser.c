@@ -9,8 +9,10 @@ int parse(char* input, char* command, char** args)
 		args[0] = temp;
 		return 0;
 	}
-	command = temp;
-	int res = i;
+	memcpy(command, temp, sizeof(temp));
+	//command[sizeof(temp)] = '\0';
+	//printf("Parser command = %s\n", command);
+	int res = 1;
 	args[0] = temp;
 	
 	while(temp != NULL && res< 10)
