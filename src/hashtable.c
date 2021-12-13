@@ -1,17 +1,4 @@
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
-#include <stdint.h>
-#include <stdbool.h>
-
-#define MAX_DATA 80
-#define TABLE_SIZE 10
-
-typedef struct {
-    char data[MAX_DATA];
-} datas;
-
-datas * hash_table[TABLE_SIZE];
+#include <hashtable.h>
 
 //Komutlarım için random hash değeri elde ediyorum.
 unsigned int hash(char *data){
@@ -54,7 +41,6 @@ bool hash_table_insert(datas* c){
 
 datas *hash_table_lookup(char *data_name){
     int index = hash(data_name);
-    //
     for(int i = 0; i < TABLE_SIZE; i++){
         int try = (index + i) % TABLE_SIZE;
         if(hash_table[try] == NULL){
@@ -67,40 +53,33 @@ datas *hash_table_lookup(char *data_name){
     return NULL; 
 }
 
-
-
-int main(){
-    datas c1 = {.data = "C1"};
-    datas c2 = {.data = "C2"};
-    datas c3 = {.data = "C3"};
-    datas c4 = {.data = "C4"};
-
-    hash_table_insert(&c1);
-    hash_table_insert(&c2);
-    hash_table_insert(&c3);
-    hash_table_insert(&c4);
-    print_table();
-
-    datas *tmp = hash_table_lookup("C1");
-    if(tmp == NULL){
-        printf("Not found!\n");
-    }else{
-        printf("Found %s. \n",tmp->data);
-    }
-
-
-    tmp = hash_table_lookup("C3");
-    if(tmp == NULL){
-        printf("Not found!\n");
-    }else{
-        printf("Found %s. \n",tmp->data);
-    }
-
-    tmp = hash_table_lookup("C5");
-    if(tmp == NULL){
-        printf("Not found!\n");
-    }else{
-        printf("Found %s. \n",tmp->data);
-    }
-    return 0;
-}
+// int main(){
+//     datas c1 = {.data = "C1"};
+//     datas c2 = {.data = "C2"};
+//     datas c3 = {.data = "C3"};
+//     datas c4 = {.data = "C4"};
+//     hash_table_insert(&c1);
+//     hash_table_insert(&c2);
+//     hash_table_insert(&c3);
+//     hash_table_insert(&c4);
+//     print_table();
+//     datas *tmp = hash_table_lookup("C1");
+//     if(tmp == NULL){
+//         printf("Not found!\n");
+//     }else{
+//         printf("Found %s. \n",tmp->data);
+//     }
+//     tmp = hash_table_lookup("C3");
+//     if(tmp == NULL){
+//         printf("Not found!\n");
+//     }else{
+//         printf("Found %s. \n",tmp->data);
+//     }
+//     tmp = hash_table_lookup("C5");
+//     if(tmp == NULL){
+//         printf("Not found!\n");
+//     }else{
+//         printf("Found %s. \n",tmp->data);
+//     }
+//     return 0;
+// }
