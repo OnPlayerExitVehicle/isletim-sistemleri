@@ -13,7 +13,10 @@ typedef struct {
 
 datas * hash_table[TABLE_SIZE];
 
-unsigned int hash(char *);
+unsigned int getHash(char *);
 void print_table();
-bool hash_table_insert(datas*);
+int hash_table_insert(datas*);
 datas *hash_table_lookup(char *);
+int hash_table_get_key(char* data_name);
+
+typedef unsigned int hash;
